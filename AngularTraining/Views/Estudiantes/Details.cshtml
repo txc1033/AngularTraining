@@ -1,0 +1,82 @@
+﻿@model AngularTraining.Controllers.Estudiante
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Estudiante</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.estu_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estu_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estu_apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estu_apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estu_cod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estu_cod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estu_curso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estu_curso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estu_profid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estu_profid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estu_sede)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estu_sede)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estu_region)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estu_region)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_idPersona)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_idPersona)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.estu_idEstudiante }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

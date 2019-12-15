@@ -1,0 +1,189 @@
+﻿@model IEnumerable<AngularTraining.Controllers.Estudiante>
+
+@{
+    ViewBag.Title = "Estudiantes";
+}
+<br />
+<div class="container">
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+    <button id="NewStudent" type="button" class="btn btn-primary" data-toggle="modal" data-target="#NewStudentModal">Agregar Estudiante</button>
+
+</div>
+
+<div id="NewStudentModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Nuevo Estudiante</h3>
+                <button style="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" id="NewStudentBody">
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" id="AddStudent" class="btn btn-success">Agregar Studiante</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="container-fluid">
+    <table id="TablaEstudiantes" class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.estu_nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estu_apellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estu_cod)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estu_curso)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estu_profid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estu_sede)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estu_region)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.per_idPersona)
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estu_nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estu_apellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estu_cod)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estu_curso)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estu_profid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estu_sede)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estu_region)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.per_idPersona)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.estu_idEstudiante }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.estu_idEstudiante }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.estu_idEstudiante })
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#TablaEstudiantes').DataTable({
+            searching: false,
+            "lengthMenu": [[5, 10, 15, 25, -1], [5, 10, 15, 25, "All"]],
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+        });
+
+        $("#NewStudent").click(function () {
+            $.ajax({
+                url: "Estudiantes/Create",
+                type: 'GET',
+                success: function (data) {
+                    //here frmEmp is id of div where you need to place returned html
+                    $("#NewStudentBody").html(data);
+                },
+                error: function (data) {
+                    alert("Error");
+                }
+
+            })
+        });
+
+        $("#AddStudent").click(function (event) {
+
+                var dataString;
+                event.preventDefault();
+                var action = $("#formEstudiante").attr("Action");
+                if ($("#formEstudiante").attr("enctype") == "multipart/form-data") {
+                    //this only works in some browsers.
+                    //purpose? to submit files over ajax. because screw iframes.
+                    //also, we need to call .get(0) on the jQuery element to turn it into a regular DOM element so that FormData can use it.
+                    dataString = new FormData($("#formEstudiante").get(0));
+                    contentType = false;
+                    processData = false;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: action,
+                    data: dataString,
+                    dataType: "json", //change to your own, else read my note above on enabling the JsonValueProviderFactory in MVC
+                    contentType: contentType,
+                    processData: processData,
+                    success: function(data) {
+                        //BTW, data is one of the worst names you can make for a variable
+                        //handleSuccessFunctionHERE(data);
+                        alert(data.Data);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        //do your own thing
+                        alert("fail");
+
+                    }
+                });
+        });
+
+    });
+
+
+
+</script>
