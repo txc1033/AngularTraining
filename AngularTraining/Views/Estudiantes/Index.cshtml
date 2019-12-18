@@ -19,6 +19,11 @@
                 <h3 class="modal-title">Nuevo Estudiante</h3>
                 <button style="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
+            <div class="row">
+                <br />
+                <div class="text-danger text-center" id="ValidStudent"></div>
+            </div>
+            
             <div class="modal-body" id="NewStudentBody">
 
             </div>
@@ -172,11 +177,16 @@
                     success: function(data) {
                         //BTW, data is one of the worst names you can make for a variable
                         //handleSuccessFunctionHERE(data);
+                         $("#ValidStudent").text("");
                         alert(data.Data);
+
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         //do your own thing
-                        alert("fail");
+                        var response = jQuery.parseJSON(jqXHR.responseText);
+                        var responseJson = jQuery.parseJSON(response.Data);
+                       // alert(responseJson.estu_nombre);
+                        $("#ValidStudent").text("Error algunos de los campos no son validos");
 
                     }
                 });
