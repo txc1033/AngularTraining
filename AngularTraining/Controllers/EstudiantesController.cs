@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -40,6 +41,9 @@ namespace AngularTraining.Controllers
         // GET: Estudiantes/Create
         public ActionResult Create()
         {
+            ViewBag.FechaActual = DateTime.Now.ToString("dd-MM-yyyy HH:mm");
+            
+
             return PartialView();
         }
 
@@ -48,20 +52,32 @@ namespace AngularTraining.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "estu_idEstudiante,estu_nombre,estu_apellido,estu_cod,estu_curso,estu_profid,estu_sede,estu_region,per_idPersona")] Estudiante estudiante)
+        public ActionResult Create(Estudiante estudiante)
         {
+            try { 
             if (ModelState.IsValid)
             {
-                db.Estudiante.Add(estudiante);
-                db.SaveChanges();
+                    var nombre = new SqlParameter("@nombre", estudiante.estu_nombre);
+                    var apellido = new SqlParameter("@apellido", estudiante.estu_apellido);
+                    var curso = new SqlParameter("@curso", estudiante.estu_curso);
+                    var sede = new SqlParameter("@sede", estudiante.estu_sede);
+                    var region = new SqlParameter("@region", estudiante.estu_region);
+                    db.Database.ExecuteSqlCommand("[colegio].[pa_agregaEstudiante] @nombre,@apellido," +
+                                         "@curso,@sede,@region",nombre,apellido,curso,sede,region);
                 Response.StatusCode = (int)HttpStatusCode.OK;
                 return Json(new JsonResult { Data = "Se agrego correctamente"});
                 //return RedirectToAction("Index");
             }
 
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            return Json(new JsonResult { Data = Newtonsoft.Json.JsonConvert.SerializeObject(estudiante) });
+            return Json(new JsonResult { Data = Newtonsoft.Json.JsonConvert.SerializeObject("Error algunos de los campos no son validos") });
+            }
+            catch(Exception except)
+            {
+                return Json(new JsonResult { Data = Newtonsoft.Json.JsonConvert.SerializeObject(except.Message) });
+            }
         }
+
 
         // GET: Estudiantes/Edit/5
         public ActionResult Edit(long? id)

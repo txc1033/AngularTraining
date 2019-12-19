@@ -218,7 +218,9 @@
     <Content Include="Views\Estudiantes\Index.cshtml" />
     <Content Include="Views\Shared\Complements.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Commands\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
