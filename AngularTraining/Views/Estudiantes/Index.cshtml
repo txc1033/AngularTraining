@@ -55,16 +55,10 @@
                     @Html.DisplayNameFor(model => model.estu_curso)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.estu_profid)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.estu_sede)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.estu_region)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.per_idPersona)
                 </th>
                 <th>
                     Acciones
@@ -89,21 +83,14 @@
                         @Html.DisplayFor(modelItem => item.estu_curso)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.estu_profid)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.estu_sede)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.estu_region)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.per_idPersona)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.estu_idEstudiante }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.estu_idEstudiante }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.estu_idEstudiante })
+                        @Html.ActionLink("Editar", "Edit", new { id = item.estu_idEstudiante }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.estu_idEstudiante })
                     </td>
                 </tr>
             }
@@ -178,7 +165,9 @@
                         //BTW, data is one of the worst names you can make for a variable
                         //handleSuccessFunctionHERE(data);
                         $("#ValidStudent").text("");
-                        document.getElementById("formEstudiante").reset();
+                        if (data.Data == "Se agrego correctamente") {
+                            document.getElementById("formEstudiante").reset();
+                        }
                         alert(data.Data);
 
                     },

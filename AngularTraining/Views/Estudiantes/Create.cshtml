@@ -3,16 +3,16 @@
 @{
     ViewBag.Title = "Estudiantes";
 }
-    @using (Html.BeginForm("Create","Estudiantes", FormMethod.Post, new { id="formEstudiante", enctype="multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        
+@using (Html.BeginForm("Create", "Estudiantes", FormMethod.Post, new { id = "formEstudiante", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.estu_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.estu_nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.estu_nombre, new { htmlAttributes = new { @class = "form-control", @placeholder = "Escribe un nombre.." } })
                 @Html.ValidationMessageFor(model => model.estu_nombre, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.estu_apellido, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.estu_apellido, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.estu_apellido, new { htmlAttributes = new { @class = "form-control", @placeholder = "Escribe un apellido.." } })
                 @Html.ValidationMessageFor(model => model.estu_apellido, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -28,33 +28,85 @@
         <div class="form-group">
             @Html.LabelFor(model => model.estu_curso, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.estu_curso, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.estu_curso, new { htmlAttributes = new { @class = "form-control", @placeholder = "Escribe un curso.." } })
                 @Html.ValidationMessageFor(model => model.estu_curso, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.estu_sede, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.estu_sede, new { htmlAttributes = new { @style ="display:none;",} })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.estu_sede, new { htmlAttributes = new { @class = "form-control" } })
+                <select class="form-control" id="lSede" onchange="filterItems(this.form.lSede,this.form.lRegion,this.form.estu_sede,true);">
+                    <option style="display:block;" value="0">Selecione una sede...</option>
+                    @{
+                        foreach (var item in ViewBag.ListaSedes.Rows)
+                        {
+                            <option style="display:block;" value="@item[4]">@item[0]</option>
+                        }
+
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.estu_sede, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.estu_region, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.estu_region, new { htmlAttributes = new { @style = "display:none;", } })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.estu_region, new { htmlAttributes = new { @class = "form-control" } })
+                <select class="form-control" id="lRegion" onchange="filterItems(this.form.lRegion,this.form.lSede,this.form.estu_region,false);">
+                    <option style="display:block;" value="0">Selecione una region...</option>
+                    @{
+                        foreach (var item in ViewBag.ListaRegiones.Rows)
+                        {
+                            <option style="display:block;" value="@item[0]">@item[1]</option>
+                        }
+
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.estu_region, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
     </div>
 
-    }
-<h5 class="text-center" style="color:lightslategrey;">Fecha estado: @ViewBag.FechaActual</h5>
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }
+<h5 class="text-center" style="color:lightslategrey; font-size: 10px;">Fecha estado: @ViewBag.FechaActual</h5>
+<script>
+
+    function filterItems(listIn,listOut,setReturn,treturn) {
+          var value = listIn.value;
+          var opt, sel = listOut;
+          if (value == '0') {
+            restoreOptions(sel);
+          }
+          else {
+            for (var i=sel.options.length-1; i>=0; i--) {
+              opt = sel.options[i];
+                if (opt.value != value ) {
+                  opt.style.display = 'none';
+                }
+                if (opt.value == value ) {
+                  opt.style.display = 'block';
+                }
+                sel.options[0].style.display = 'block';
+              }
+              var optSelectId = listIn.selectedIndex;
+              var optSelectText = listIn.options[optSelectId].text;
+              var optSelectVal = listIn.options[optSelectId].value;
+              setReturn.value = treturn ? optSelectText : optSelectVal;
+          }
+    }
+
+    function restoreOptions(el) {
+        var opt, sel = el;
+        for (var i=sel.options.length-1; i>=0; i--) {
+            opt = sel.options[i];
+            opt.style.display = 'block';
+        }
+    }
+
+
+</script>

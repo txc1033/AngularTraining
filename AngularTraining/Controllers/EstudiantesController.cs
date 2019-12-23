@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -20,7 +21,7 @@ namespace AngularTraining.Controllers
             List<Estudiante> estudiantes = db.Estudiante.ToList();
 
 
-            return View(estudiantes.Take(50));
+            return View(estudiantes.OrderByDescending(e => e.estu_idEstudiante).Take(50));
         }
 
         // GET: Estudiantes/Details/5
@@ -41,11 +42,34 @@ namespace AngularTraining.Controllers
         // GET: Estudiantes/Create
         public ActionResult Create()
         {
+            string llamaListaCommand = "[colegio].[pa_RetornaLista] @idLista";
             ViewBag.FechaActual = DateTime.Now.ToString("dd-MM-yyyy HH:mm");
-            
 
+            using (var cn = db)
+            {
+                var tb = new DataTable();
+             var cmd = db.Database.Connection.CreateCommand();
+            cmd.CommandText = llamaListaCommand;
+            cmd.Parameters.Add(new SqlParameter("@idLista", 1));
+                cmd.Connection.Open();
+            tb.Load(cmd.ExecuteReader());
+
+                ViewBag.ListaSedes = tb;
+                ViewBag.listSedes = new SelectList(tb.AsDataView(), "Id", "Name");
+                tb = null;
+                tb = new DataTable();
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add(new SqlParameter("@idLista", 2));
+                tb.Load(cmd.ExecuteReader());
+                ViewBag.ListaRegiones = tb;
+                ViewBag.listRegion = new SelectList(tb.AsDataView(), "Id", "Name");
+
+
+            }
             return PartialView();
         }
+
+
 
         // POST: Estudiantes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
@@ -66,7 +90,6 @@ namespace AngularTraining.Controllers
                                          "@curso,@sede,@region",nombre,apellido,curso,sede,region);
                 Response.StatusCode = (int)HttpStatusCode.OK;
                 return Json(new JsonResult { Data = "Se agrego correctamente"});
-                //return RedirectToAction("Index");
             }
 
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
