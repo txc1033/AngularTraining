@@ -141,38 +141,35 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datatables.min.css" />
+    <Content Include="Content\DtSkinsCss\dataTables.semanticui.min.css" />
+    <Content Include="Content\DtSkinsCss\db.boostrap4Icons.css" />
+    <Content Include="Content\DtSkinsCss\semantic.min.css" />
     <Content Include="Content\responsive.bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Desingers\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\Desingers\bootstrap.min.js" />
     <Content Include="angular.json" />
     <Content Include="package.json" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\DataTables-1.10.18\images\next.png" />
-    <Content Include="Scripts\DataTables-1.10.18\images\previous.png" />
-    <Content Include="Scripts\DataTables-1.10.18\images\sort_asc.png" />
-    <Content Include="Scripts\DataTables-1.10.18\images\sort_both.png" />
-    <Content Include="Scripts\DataTables-1.10.18\images\sort_desc.png" />
-    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
-    <Content Include="Scripts\datatables.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <None Include="Scripts\Mains\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Desingers\datatables.min.js" />
+    <Content Include="Scripts\Desingers\DtSkinsJs\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\Desingers\DtSkinsJs\semantic.min.js" />
+    <Content Include="Scripts\FormsControls\Estudiantes\estudiante-asignations.js" />
+    <Content Include="Scripts\FormsControls\Estudiantes\estudiante-dt.js" />
+    <Content Include="Scripts\Mains\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\Mains\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\FormsControls\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Mains\jquery-ui.min.js" />
+    <Content Include="Scripts\FormsControls\jquery.validate.min.js" />
+    <Content Include="Scripts\FormsControls\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\libs\favicon.ico" />
     <Content Include="Scripts\libs\index.html" />
     <Content Include="Scripts\libs\main.js" />
@@ -180,7 +177,8 @@
     <Content Include="Scripts\libs\runtime.js" />
     <Content Include="Scripts\libs\styles.js" />
     <Content Include="Scripts\libs\vendor.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Desingers\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Desingers\sweetalert2.all.min.js" />
     <Content Include="src\app\app.component.html" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\index.html" />
@@ -226,13 +224,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\app\app.component.spec.ts" />
@@ -274,6 +266,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties package_1json__JsonSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
