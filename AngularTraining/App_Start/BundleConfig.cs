@@ -24,7 +24,8 @@ namespace AngularTraining
                       "~/Scripts/Desingers/modernizr-*",
                       "~/Scripts/Desingers/datatables.min.js",
                       "~/Scripts/Desingers/DtSkinsJs/dataTables.semanticui.min.js",
-                      "~/Scripts/Desingers/DtSkinsJs/semantic.min.js"));
+                      "~/Scripts/Desingers/DtSkinsJs/semantic.min.js",
+                      "~/Scripts/Desingers/DtSkinsJs/toastr.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
@@ -32,14 +33,16 @@ namespace AngularTraining
                       "~/Content/site.css",
                       "~/Content/DtSkinsCss/semantic.min.css",
                       "~/Content/DtSkinsCss/dataTables.semanticui.min.css",
-                      "~/Content/DtSkinsCss/db.boostrap4Icons.css"));
+                      "~/Content/DtSkinsCss/db.boostrap4Icons.css",
+                      "~/Content/toastr.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                  "~/Scripts/libs/runtime*",
-                  "~/Scripts/libs/polyfills*",
-                  "~/Scripts/libs/vendor*",
-                  "~/Scripts/libs/main*"));
+                              "~/Scripts/angular.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/EscuelaNg").Include(
+                              "~/Scripts/app/Modulo.js",
+                              "~/Scripts/app/Servicios.js",
+                              "~/Scripts/app/Controlador.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Estudiantes").Include(
                     "~/Scripts/FormsControls/Estudiantes/estudiante*"

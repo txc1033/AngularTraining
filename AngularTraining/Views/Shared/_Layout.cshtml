@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="gestionEscuela">
+<html ng-app="EscuelaNg">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
@@ -16,14 +16,14 @@
             @Html.ActionLink("Gestion Escuela", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
+                <li class="nav-item">
                     @Html.ActionLink("Estudiantes", "", "Estudiantes", new { area = "" }, new { @class = "nav-link" })
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     @Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link disabled" })
+                    @Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
                 </li>
             </ul>
 
@@ -38,5 +38,6 @@
                 <p>&copy; @DateTime.Now.Year - Mvc.Net Angular</p>
             </footer>
         </div>
+    @Scripts.Render("~/bundles/EscuelaNg");
 </body>
 </html>
